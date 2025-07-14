@@ -12,12 +12,18 @@ function Landingpage() {
         <h1>GadiSawari</h1>
         <nav>
           <div className="nav-links">
-            <a href="#">Home</a>
+            <a href="#" onClick={() => navigate("/")}>
+              Home
+            </a>
             <a href="#" onClick={() => navigate("/cars")}>
               Cars
             </a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="#" onClick={() => navigate("/about")}>
+              About
+            </a>
+            <a href="#" onClick={() => navigate("/contact")}>
+              Contact
+            </a>
           </div>
           <button className="nav-login-btn" onClick={() => navigate("/login")}>
             Login
