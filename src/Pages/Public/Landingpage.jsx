@@ -1,8 +1,11 @@
 import React from "react";
 import "../../Styles/Landingpage.css";
 import heroImage from "../../assets/images/car.png";
+import { useNavigate } from "react-router-dom";
 
-function Landingpage({ onLoginClick }) {
+function Landingpage() {
+  const navigate = useNavigate();
+
   return (
     <div>
       <header>
@@ -10,11 +13,13 @@ function Landingpage({ onLoginClick }) {
         <nav>
           <div className="nav-links">
             <a href="#">Home</a>
-            <a href="#">Cars</a>
+            <a href="#" onClick={() => navigate("/cars")}>
+              Cars
+            </a>
             <a href="#">About</a>
             <a href="#">Contact</a>
           </div>
-          <button className="nav-login-btn" onClick={onLoginClick}>
+          <button className="nav-login-btn" onClick={() => navigate("/login")}>
             Login
           </button>
         </nav>
@@ -39,7 +44,7 @@ function Landingpage({ onLoginClick }) {
         <div className="card">
           <h3>🚗 Rent a Car</h3>
           <p>Find and book a car for your trip.</p>
-          <button>Explore Cars</button>
+          <button onClick={() => navigate("/cars")}>Explore Cars</button>
         </div>
       </section>
 
@@ -160,7 +165,6 @@ function Landingpage({ onLoginClick }) {
               pickup was a breeze. Will definitely use GadiSawari again!
             </p>
           </div>
-
           <div className="testimonial-card">
             <div className="testimonial-header">
               <div className="customer-avatar">
@@ -181,7 +185,6 @@ function Landingpage({ onLoginClick }) {
               perfect condition. The whole experience was worth every penny.
             </p>
           </div>
-
           <div className="testimonial-card">
             <div className="testimonial-header">
               <div className="customer-avatar">
