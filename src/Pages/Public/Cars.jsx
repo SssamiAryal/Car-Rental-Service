@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../../Styles/cars.css";
 import { useNavigate, Link } from "react-router-dom";
 import { FaUserFriends, FaGasPump, FaCog, FaHome } from "react-icons/fa";
+import LoginPopup from "./loginpopup";
 
 import teslaimage from "../../assets/images/Tesla.png";
 import bmw from "../../assets/images/Bmw.png";
@@ -18,6 +19,12 @@ import volkswagon from "../../assets/images/Volkswagon.png";
 
 const Cars = ({ isLoggedIn }) => {
   const navigate = useNavigate();
+
+  const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedTransmission, setSelectedTransmission] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [selectedCarId, setSelectedCarId] = useState(null);
 
   const [cars] = useState([
     {
@@ -158,9 +165,35 @@ const Cars = ({ isLoggedIn }) => {
     if (isLoggedIn) {
       navigate(`/book/${id}`);
     } else {
-      alert("Please login to book a car.");
+      setSelectedCarId(id);
+      setShowLoginPopup(true);
     }
   };
+
+  const handleViewDetails = (id) => {
+    if (isLoggedIn) {
+      navigate(`/cars/${id}`);
+    } else {
+      setSelectedCarId(id);
+      setShowLoginPopup(true);
+    }
+  };
+
+  const onLoginClick = () => {
+    setShowLoginPopup(false);
+    navigate("/login");
+  };
+
+  const filteredCars = cars
+    .filter((car) => (selectedBrand ? car.brand === selectedBrand : true))
+    .filter((car) =>
+      selectedTransmission ? car.transmission === selectedTransmission : true
+    )
+    .sort((a, b) => {
+      if (sortOrder === "low") return a.price - b.price;
+      if (sortOrder === "high") return b.price - a.price;
+      return 0;
+    });
 
   return (
     <div className="cars-page">
@@ -170,31 +203,70 @@ const Cars = ({ isLoggedIn }) => {
 
       <aside className="filters-section">
         <h3>Filters</h3>
-        <div className="filter-group">
-          <p>Category</p>
-          {["Economy", "Luxury", "SUV", "Sports", "Family"].map((cat) => (
-            <label key={cat}>
-              <input type="checkbox" /> {cat}
-            </label>
-          ))}
-        </div>
+
         <div className="filter-group">
           <p>Brand</p>
-          {["Tesla", "BMW", "Mercedes", "Toyota", "Honda", "Porsche"].map(
-            (brand) => (
-              <label key={brand}>
-                <input type="checkbox" /> {brand}
-              </label>
-            )
-          )}
-        </div>
-        <div className="filter-group">
-          <p>Transmission</p>
-          {["Automatic", "Manual"].map((t) => (
-            <label key={t}>
-              <input type="checkbox" /> {t}
+          {[
+            "Tesla",
+            "BMW",
+            "Mercedes",
+            "Toyota",
+            "Honda",
+            "Porsche",
+            "Audi",
+            "Ford",
+            "Jeep",
+            "Chevrolet",
+            "Nissan",
+            "Volkswagen",
+          ].map((brand) => (
+            <label key={brand}>
+              <input
+                type="radio"
+                name="brand"
+                value={brand}
+                checked={selectedBrand === brand}
+                onChange={() => setSelectedBrand(brand)}
+              />{" "}
+              {brand}
             </label>
           ))}
+          <label>
+            <input
+              type="radio"
+              name="brand"
+              value=""
+              checked={selectedBrand === ""}
+              onChange={() => setSelectedBrand("")}
+            />{" "}
+            All
+          </label>
+        </div>
+
+        <div className="filter-group">
+          <p>Transmission</p>
+          {["Automatic", "Manual"].map((trans) => (
+            <label key={trans}>
+              <input
+                type="radio"
+                name="transmission"
+                value={trans}
+                checked={selectedTransmission === trans}
+                onChange={() => setSelectedTransmission(trans)}
+              />{" "}
+              {trans}
+            </label>
+          ))}
+          <label>
+            <input
+              type="radio"
+              name="transmission"
+              value=""
+              checked={selectedTransmission === ""}
+              onChange={() => setSelectedTransmission("")}
+            />{" "}
+            All
+          </label>
         </div>
       </aside>
 
@@ -204,14 +276,24 @@ const Cars = ({ isLoggedIn }) => {
             <h2>Browse Our Cars</h2>
             <p>Find the perfect vehicle for your journey.</p>
           </div>
-          <select className="sort-select">
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
+          <select
+            className="sort-select"
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+          >
+            <option value="">Sort By</option>
+            <option value="low">Price: Low to High</option>
+            <option value="high">Price: High to Low</option>
           </select>
         </div>
 
         <div className="car-grid">
-          {cars.map((car) => (
+          {filteredCars.length === 0 && (
+            <p style={{ padding: "20px", fontStyle: "italic" }}>
+              No cars found matching your filters.
+            </p>
+          )}
+          {filteredCars.map((car) => (
             <div className="car-card" key={car._id}>
               <img src={car.image} alt={car.name} />
               <div className="car-price">${car.price}/day</div>
@@ -230,7 +312,12 @@ const Cars = ({ isLoggedIn }) => {
               </div>
               <div className="car-rating">⭐ {car.rating}</div>
               <div className="car-actions">
-                <button className="view-btn">View Details</button>
+                <button
+                  className="view-btn"
+                  onClick={() => handleViewDetails(car._id)}
+                >
+                  View Details
+                </button>
                 <button
                   className="book-btn"
                   onClick={() => handleBook(car._id)}
@@ -242,6 +329,13 @@ const Cars = ({ isLoggedIn }) => {
           ))}
         </div>
       </section>
+
+      {showLoginPopup && (
+        <LoginPopup
+          onClose={() => setShowLoginPopup(false)}
+          onLoginClick={onLoginClick}
+        />
+      )}
     </div>
   );
 };

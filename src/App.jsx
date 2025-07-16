@@ -11,6 +11,7 @@ import Registerpage from "./Pages/Public/Registerpage";
 import Forgetpassword from "./Pages/Public/Forgetpassword";
 import Cars from "./Pages/Public/Cars";
 import About from "./Pages/Public/About";
+import Contact from "./Pages/Public/Contact";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -48,6 +49,7 @@ function App() {
       <Route path="/register" element={<RegisterWrapper />} />
       <Route path="/forgetpassword" element={<ForgetWrapper />} />
       <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
     </Routes>
   );
 }
