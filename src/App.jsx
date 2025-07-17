@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate,
   useNavigate,
 } from "react-router-dom";
 import Landingpage from "./Pages/Public/Landingpage";
@@ -12,18 +13,33 @@ import Forgetpassword from "./Pages/Public/Forgetpassword";
 import Cars from "./Pages/Public/Cars";
 import About from "./Pages/Public/About";
 import Contact from "./Pages/Public/Contact";
+import Dashboard from "./Pages/Private/Dashboard";
+
+function PrivateRoute({ children }) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+}
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+
   const navigate = useNavigate();
 
   const LoginWrapper = () => {
-    const navigate = useNavigate();
     return (
       <Loginpage
-        onLogin={() => setIsLoggedIn(true)}
-        onLogout={() => setIsLoggedIn(false)}
+        onLogin={() => {
+          setIsLoggedIn(true);
+          navigate("/dashboard");
+        }}
         onBack={() => navigate("/")}
         onRegisterClick={() => navigate("/register")}
         onForgetClick={() => navigate("/forgetpassword")}
@@ -32,12 +48,10 @@ function App() {
   };
 
   const RegisterWrapper = () => {
-    const navigate = useNavigate();
     return <Registerpage onBack={() => navigate("/login")} />;
   };
 
   const ForgetWrapper = () => {
-    const navigate = useNavigate();
     return <Forgetpassword onBack={() => navigate("/login")} />;
   };
 
@@ -50,6 +64,15 @@ function App() {
       <Route path="/forgetpassword" element={<ForgetWrapper />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
+
+      <Route
+        path="/dashboard"
+        element={
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        }
+      />
     </Routes>
   );
 }
