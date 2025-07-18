@@ -1,4 +1,3 @@
-// Dashboard.jsx
 import React, { useState, useEffect } from "react";
 import "../../Styles/Dashboard.css";
 import heroImage from "../../assets/images/car.png";
