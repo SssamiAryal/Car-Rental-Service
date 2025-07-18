@@ -2,7 +2,17 @@ import React, { useState, useEffect } from "react";
 import "../../Styles/Dashboard.css";
 import heroImage from "../../assets/images/car.png";
 import { useNavigate, Link } from "react-router-dom";
-import { FaSignOutAlt, FaUser } from "react-icons/fa";
+import {
+  FaSignOutAlt,
+  FaUser,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaStar,
+} from "react-icons/fa";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -163,6 +173,119 @@ function Dashboard() {
           </div>
         </div>
       </section>
+
+      <section className="testimonials">
+        <h2 className="section-title">What Our Customers Say</h2>
+        <div className="testimonial-cards">
+          <div className="testimonial-card">
+            <p>
+              "GadiSawari made my trip effortless. The car was clean and the
+              service was excellent."
+            </p>
+            <div className="customer-info">
+              <div className="stars">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+              <h4>Ramesh Thapa</h4>
+              <span>Traveler</span>
+            </div>
+          </div>
+          <div className="testimonial-card">
+            <p>
+              "Booking was easy and the support team was super helpful. Highly
+              recommend!"
+            </p>
+            <div className="customer-info">
+              <div className="stars">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+              <h4>Sita Gurung</h4>
+              <span>Business Traveler</span>
+            </div>
+          </div>
+          <div className="testimonial-card">
+            <p>
+              "Affordable prices and excellent cars. I will definitely use
+              GadiSawari again."
+            </p>
+            <div className="customer-info">
+              <div className="stars">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+              <h4>Kiran Shrestha</h4>
+              <span>Tourist</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="newsletter">
+        <h2 className="section-title">Stay Updated</h2>
+        <p>Subscribe to our newsletter for the latest offers and updates.</p>
+        <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
+          <input type="email" placeholder="Enter your email" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </section>
+
+      <footer className="footer">
+        <div className="footer-container">
+          <div className="footer-section">
+            <h3>GadiSawari</h3>
+            <p>Your trusted partner for reliable and premium car rentals.</p>
+            <div className="social-icons">
+              <a href="#" aria-label="Facebook">
+                <FaFacebookF />
+              </a>
+              <a href="#" aria-label="Twitter">
+                <FaTwitter />
+              </a>
+              <a href="#" aria-label="Instagram">
+                <FaInstagram />
+              </a>
+            </div>
+          </div>
+          <div className="footer-section">
+            <h4>Contact Us</h4>
+            <p>
+              <FaPhoneAlt /> +977 9800000000
+            </p>
+            <p>
+              <FaEnvelope /> support@gadisawari.com
+            </p>
+            <p>
+              <FaMapMarkerAlt /> Kathmandu, Nepal
+            </p>
+          </div>
+          <div className="footer-section">
+            <h4>Quick Links</h4>
+            <Link to="/dashboard">Home</Link>
+            <Link to="/dashboard/cars">Cars</Link>
+            <Link to="/dashboard/about">About</Link>
+            <Link to="/dashboard/contact">Contact</Link>
+          </div>
+          <div className="footer-section">
+            <h4>Working Hours</h4>
+            <p>Mon - Fri: 8:00 AM - 8:00 PM</p>
+            <p>Sat: 9:00 AM - 5:00 PM</p>
+            <p>Sun: Closed</p>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          © 2025 GadiSawari. All rights reserved.
+        </div>
+      </footer>
     </div>
   );
 }
