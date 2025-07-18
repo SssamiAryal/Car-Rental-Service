@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../../Styles/privcars.css";
-import { Link } from "react-router-dom";
+import "../../Styles/PrivCars.css";
+import { useNavigate, Link } from "react-router-dom";
 import { FaUserFriends, FaGasPump, FaCog, FaHome } from "react-icons/fa";
 
 import teslaimage from "../../assets/images/Tesla.png";
@@ -17,6 +17,8 @@ import nissan from "../../assets/images/Nissan.png";
 import volkswagon from "../../assets/images/Volkswagon.png";
 
 const PrivCars = () => {
+  const navigate = useNavigate();
+
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedTransmission, setSelectedTransmission] = useState("");
   const [sortOrder, setSortOrder] = useState("");
@@ -156,6 +158,14 @@ const PrivCars = () => {
     },
   ]);
 
+  const handleBook = (id) => {
+    navigate(`/book/${id}`);
+  };
+
+  const handleViewDetails = (id) => {
+    navigate(`/cars/${id}`);
+  };
+
   const filteredCars = cars
     .filter((car) => (selectedBrand ? car.brand === selectedBrand : true))
     .filter((car) =>
@@ -168,18 +178,17 @@ const PrivCars = () => {
     });
 
   return (
-    <div className="privcars-page">
+    <div className="cars-page">
       <Link
         to="/dashboard"
         className="floating-home-btn"
-        title="Back to Dashboard"
+        title="Go to Dashboard"
       >
         <FaHome size={24} />
       </Link>
 
       <aside className="filters-section">
         <h3>Filters</h3>
-
         <div className="filter-group">
           <p>Brand</p>
           {[
@@ -249,8 +258,8 @@ const PrivCars = () => {
       <section className="cars-section">
         <div className="cars-header">
           <div>
-            <h2>Private Cars</h2>
-            <p>Only accessible to logged-in users.</p>
+            <h2>Browse Our Cars</h2>
+            <p>Find the perfect vehicle for your journey.</p>
           </div>
           <select
             className="sort-select"
@@ -264,6 +273,11 @@ const PrivCars = () => {
         </div>
 
         <div className="car-grid">
+          {filteredCars.length === 0 && (
+            <p style={{ padding: "20px", fontStyle: "italic" }}>
+              No cars found matching your filters.
+            </p>
+          )}
           {filteredCars.map((car) => (
             <div className="car-card" key={car._id}>
               <img src={car.image} alt={car.name} />
@@ -283,8 +297,18 @@ const PrivCars = () => {
               </div>
               <div className="car-rating">⭐ {car.rating}</div>
               <div className="car-actions">
-                <button className="view-btn">View Details</button>
-                <button className="book-btn">Book Now</button>
+                <button
+                  className="view-btn"
+                  onClick={() => handleViewDetails(car._id)}
+                >
+                  View Details
+                </button>
+                <button
+                  className="book-btn"
+                  onClick={() => handleBook(car._id)}
+                >
+                  Book Now
+                </button>
               </div>
             </div>
           ))}
