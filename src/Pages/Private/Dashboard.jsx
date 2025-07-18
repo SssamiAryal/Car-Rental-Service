@@ -23,9 +23,9 @@ function Dashboard() {
   };
 
   return (
-    <div className="dashboard">
-      <header>
-        <h1>GadiSawari</h1>
+    <div>
+      <header className="navbar">
+        <h1 className="logo">GadiSawari</h1>
         <nav>
           <div className="nav-links">
             <Link to="/dashboard">Home</Link>
@@ -39,13 +39,13 @@ function Dashboard() {
               onClick={() => setShowDropdown(!showDropdown)}
             >
               <div className="profile-circle">
-                {user.name?.trim() ? (
+                {user.name && user.name.trim() !== "" ? (
                   user.name.trim().charAt(0).toUpperCase()
                 ) : (
                   <FaUser style={{ fontSize: "18px" }} />
                 )}
               </div>
-              <span>{user.name?.split(" ")[0]}</span> ⌄
+              <span>{user.name ? user.name.split(" ")[0] : ""}</span> ⌄
             </div>
             {showDropdown && (
               <div className="profile-dropdown">
