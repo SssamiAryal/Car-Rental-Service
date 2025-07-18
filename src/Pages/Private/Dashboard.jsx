@@ -83,6 +83,86 @@ function Dashboard() {
           </div>
         </div>
       </section>
+
+      <section className="service">
+        <h2>Choose your service</h2>
+        <div className="card">
+          <h3>🚗 Rent a Car</h3>
+          <p>Find and book a car for your trip.</p>
+          <button onClick={() => navigate("/dashboard/cars")}>
+            Explore Cars
+          </button>
+        </div>
+      </section>
+
+      <section className="features">
+        <h2>Why Choose GadiSawari?</h2>
+        <p>
+          We provide exceptional car rental services with unmatched quality,
+          convenience, and customer satisfaction.
+        </p>
+        <div className="feature-grid">
+          <div className="feature-box">
+            <div className="icon">🚘</div>
+            <h4>Premium Fleet</h4>
+            <p>
+              Choose from our extensive collection of luxury and economy cars.
+            </p>
+          </div>
+          <div className="feature-box">
+            <div className="icon">🛡️</div>
+            <h4>Full Insurance</h4>
+            <p>
+              Enjoy complete coverage and roadside assistance with every rental.
+            </p>
+          </div>
+          <div className="feature-box">
+            <div className="icon">⏰</div>
+            <h4>24/7 Support</h4>
+            <p>
+              Always-on customer support and emergency help when you need it.
+            </p>
+          </div>
+          <div className="feature-box">
+            <div className="icon">📍</div>
+            <h4>Multiple Locations</h4>
+            <p>Convenient pickup and drop-off in major cities and airports.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="how-it-works">
+        <h2 className="section-title">How It Works</h2>
+        <p className="section-subtitle">
+          Renting a car with GadiSawari is simple. Just follow these steps and
+          hit the road.
+        </p>
+        <div className="steps-container">
+          <div className="step-box">
+            <div className="step-circle">1</div>
+            <h3>Choose Your Car</h3>
+            <p>
+              Browse our wide selection of vehicles and pick the best fit for
+              your journey.
+            </p>
+          </div>
+          <div className="step-box">
+            <div className="step-circle">2</div>
+            <h3>Book & Pay</h3>
+            <p>
+              Select your dates, confirm your booking, and pay securely online.
+            </p>
+          </div>
+          <div className="step-box">
+            <div className="step-circle">3</div>
+            <h3>Enjoy the Ride</h3>
+            <p>
+              Pick up your car and enjoy a premium, hassle-free driving
+              experience.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
