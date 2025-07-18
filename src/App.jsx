@@ -14,6 +14,7 @@ import Cars from "./Pages/Public/Cars";
 import About from "./Pages/Public/About";
 import Contact from "./Pages/Public/Contact";
 import Dashboard from "./Pages/Private/Dashboard";
+import PrivCars from "./Pages/Private/PrivCars";
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -25,13 +26,12 @@ function PrivateRoute({ children }) {
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
   }, []);
-
-  const navigate = useNavigate();
 
   const LoginWrapper = () => {
     return (
@@ -64,12 +64,19 @@ function App() {
       <Route path="/forgetpassword" element={<ForgetWrapper />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
-
       <Route
         path="/dashboard"
         element={
           <PrivateRoute>
             <Dashboard />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/dashboard/cars"
+        element={
+          <PrivateRoute>
+            <PrivCars />
           </PrivateRoute>
         }
       />

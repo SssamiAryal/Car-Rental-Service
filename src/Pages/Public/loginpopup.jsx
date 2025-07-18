@@ -7,7 +7,7 @@ const LoginPopup = ({ onClose }) => {
 
   const handleLoginRedirect = () => {
     navigate("/login");
-    onClose(); 
+    onClose();
   };
 
   return (

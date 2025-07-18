@@ -24,9 +24,8 @@ const Cars = ({ isLoggedIn }) => {
   const [selectedTransmission, setSelectedTransmission] = useState("");
   const [sortOrder, setSortOrder] = useState("");
   const [showLoginPopup, setShowLoginPopup] = useState(false);
-  const [selectedCarId, setSelectedCarId] = useState(null);
 
-  const [cars] = useState([
+  const cars = [
     {
       _id: "1",
       name: "Tesla Model 3",
@@ -159,24 +158,16 @@ const Cars = ({ isLoggedIn }) => {
       rating: 4.5,
       image: volkswagon,
     },
-  ]);
+  ];
 
   const handleBook = (id) => {
-    if (isLoggedIn) {
-      navigate(`/book/${id}`);
-    } else {
-      setSelectedCarId(id);
-      setShowLoginPopup(true);
-    }
+    if (isLoggedIn) navigate(`/book/${id}`);
+    else setShowLoginPopup(true);
   };
 
   const handleViewDetails = (id) => {
-    if (isLoggedIn) {
-      navigate(`/cars/${id}`);
-    } else {
-      setSelectedCarId(id);
-      setShowLoginPopup(true);
-    }
+    if (isLoggedIn) navigate(`/cars/${id}`);
+    else setShowLoginPopup(true);
   };
 
   const onLoginClick = () => {
@@ -197,13 +188,12 @@ const Cars = ({ isLoggedIn }) => {
 
   return (
     <div className="cars-page">
-      <Link to="/" className="floating-home-btn" title="Back to Home">
+      <Link to="/" className="floating-home-btn">
         <FaHome size={24} />
       </Link>
 
       <aside className="filters-section">
         <h3>Filters</h3>
-
         <div className="filter-group">
           <p>Brand</p>
           {[

@@ -1,42 +1,37 @@
-/* src/Styles/Dashboard.css */
-header {
-  background-color: #0a3d62;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dashboard header {
+  background: #1a1a1a;
+  padding: 16px 32px;
   color: white;
-  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-header h1 {
-  font-size: 28px;
-  font-weight: 700;
-}
-
-header nav {
-  display: flex;
-  align-items: center;
-  gap: 30px;
+  position: relative;
 }
 
 .nav-links {
   display: flex;
-  gap: 20px;
+  gap: 24px;
 }
 
 .nav-links a {
   color: white;
   text-decoration: none;
   font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
-  text-decoration: underline;
+  color: #1e90ff;
 }
 
 .profile-section {
   position: relative;
-  user-select: none;
 }
 
 .profile-button {
@@ -44,59 +39,137 @@ header nav {
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  font-weight: 600;
-  color: white;
+  background: #2a2a2a;
+  padding: 8px 14px;
+  border-radius: 20px;
 }
 
 .profile-circle {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: #145a86;
+  width: 28px;
+  height: 28px;
+  background: #1e90ff;
   color: white;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 18px;
-  user-select: none;
+  font-weight: bold;
 }
 
 .profile-dropdown {
   position: absolute;
-  top: 48px;
   right: 0;
-  background-color: white;
-  color: #0a3d62;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  width: 160px;
-  display: flex;
-  flex-direction: column;
-  z-index: 10;
+  top: 50px;
+  background: white;
   padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  min-width: 200px;
+  text-align: left;
 }
 
 .profile-dropdown p {
-  margin: 0 0 10px 0;
   font-size: 14px;
+  margin-bottom: 10px;
   color: #333;
 }
 
 .logout-btn {
-  padding: 10px 16px;
-  background-color: #d9534f;
-  border: none;
+  background-color: #e53935;
   color: white;
-  font-weight: 600;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
   cursor: pointer;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
 }
 
 .logout-btn:hover {
-  background-color: #c9302c;
+  background-color: #c62828;
+}
+
+.hero {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 60px 30px;
+  border-radius: 16px;
+  text-align: center;
+  color: #fff;
+  max-width: 800px;
+  width: 90%;
+}
+
+.overlay h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.overlay p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #e0e0e0;
+}
+
+.search-form {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.search-form select,
+.search-form input {
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  min-width: 180px;
+  outline: none;
+}
+
+.search-form button {
+  background-color: #1e90ff;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-form button:hover {
+  background-color: #0072e4;
+}
+
+@media screen and (max-width: 768px) {
+  .overlay h2 {
+    font-size: 2rem;
+  }
+
+  .search-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-form select,
+  .search-form input,
+  .search-form button {
+    width: 100%;
+  }
 }
