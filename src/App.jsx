@@ -1,3 +1,4 @@
+// App.jsx
 import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -15,6 +16,7 @@ import About from "./Pages/Public/About";
 import Contact from "./Pages/Public/Contact";
 import Dashboard from "./Pages/Private/Dashboard";
 import PrivCars from "./Pages/Private/PrivCars";
+import PrivAbout from "./Pages/Private/PrivAbout";
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -77,6 +79,14 @@ function App() {
         element={
           <PrivateRoute>
             <PrivCars />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/dashboard/about"
+        element={
+          <PrivateRoute>
+            <PrivAbout />
           </PrivateRoute>
         }
       />
