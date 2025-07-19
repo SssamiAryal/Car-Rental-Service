@@ -75,8 +75,8 @@ const BookCar = () => {
 
   return (
     <div className="bookcar-container">
-      <button className="back-button" onClick={() => navigate(-1)}>
-        ← Back
+      <button className="top-left-back" onClick={() => navigate(-1)}>
+        ←
       </button>
       {carImage && (
         <div className="car-image-container">
@@ -103,6 +103,7 @@ const BookCar = () => {
                   value={data.pickupLocation}
                   onChange={handleChange}
                   required
+                  autoComplete="off"
                 />
               </div>
               <div className="input-group">
@@ -114,6 +115,7 @@ const BookCar = () => {
                   value={data.dropoffLocation}
                   onChange={handleChange}
                   required
+                  autoComplete="off"
                 />
               </div>
             </div>
@@ -126,6 +128,7 @@ const BookCar = () => {
                   value={data.pickupDate}
                   onChange={handleChange}
                   required
+                  min={new Date().toISOString().split("T")[0]}
                 />
               </div>
               <div className="input-group">
@@ -136,6 +139,9 @@ const BookCar = () => {
                   value={data.dropoffDate}
                   onChange={handleChange}
                   required
+                  min={
+                    data.pickupDate || new Date().toISOString().split("T")[0]
+                  }
                 />
               </div>
             </div>
@@ -150,6 +156,7 @@ const BookCar = () => {
               value={data.fullName}
               onChange={handleChange}
               required
+              autoComplete="name"
             />
             <input
               type="email"
@@ -158,6 +165,7 @@ const BookCar = () => {
               value={data.email}
               onChange={handleChange}
               required
+              autoComplete="email"
             />
             <input
               type="tel"
@@ -166,6 +174,7 @@ const BookCar = () => {
               value={data.phone}
               onChange={handleChange}
               required
+              autoComplete="tel"
             />
           </>
         )}
@@ -179,6 +188,9 @@ const BookCar = () => {
               onChange={handleChange}
               maxLength={16}
               required
+              pattern="\d{16}"
+              title="Enter 16 digit card number"
+              autoComplete="cc-number"
             />
             <div className="input-row">
               <input
@@ -187,6 +199,8 @@ const BookCar = () => {
                 value={data.expiryDate}
                 onChange={handleChange}
                 required
+                min={new Date().toISOString().slice(0, 7)}
+                autoComplete="cc-exp"
               />
               <input
                 type="password"
@@ -196,6 +210,9 @@ const BookCar = () => {
                 onChange={handleChange}
                 maxLength={3}
                 required
+                pattern="\d{3}"
+                title="Enter 3 digit CVV"
+                autoComplete="cc-csc"
               />
             </div>
           </>
@@ -203,23 +220,56 @@ const BookCar = () => {
         {step === 4 && (
           <div className="confirmation">
             <h3>Booking Confirmed!</h3>
-            <p>Thank you, {data.fullName}. Your booking is successful.</p>
-            <p>Confirmation sent to {data.email}</p>
+            <div className="confirmation-details">
+              <p>
+                <strong>Name:</strong> {data.fullName}
+              </p>
+              <p>
+                <strong>Email:</strong> {data.email}
+              </p>
+              <p>
+                <strong>Phone:</strong> {data.phone}
+              </p>
+              <p>
+                <strong>Pickup Location:</strong> {data.pickupLocation}
+              </p>
+              <p>
+                <strong>Dropoff Location:</strong> {data.dropoffLocation}
+              </p>
+              <p>
+                <strong>Rental Dates:</strong> {data.pickupDate} to{" "}
+                {data.dropoffDate}
+              </p>
+              <p>
+                <strong>Car Selected:</strong> {carId && `Car ID: ${carId}`}
+              </p>
+            </div>
+            <button
+              className="done-button"
+              onClick={() => navigate("/dashboard")}
+              type="button"
+            >
+              Done
+            </button>
           </div>
         )}
         {step < 4 && (
           <div className="buttons">
             {step > 1 && (
-              <button type="button" onClick={back}>
+              <button type="button" className="back-btn-bottom" onClick={back}>
                 Back
               </button>
             )}
             {step < 3 && (
-              <button type="button" onClick={next}>
+              <button type="button" className="next-btn" onClick={next}>
                 Next
               </button>
             )}
-            {step === 3 && <button type="submit">Confirm Booking</button>}
+            {step === 3 && (
+              <button type="submit" className="confirm-btn">
+                Confirm Booking
+              </button>
+            )}
           </div>
         )}
       </form>

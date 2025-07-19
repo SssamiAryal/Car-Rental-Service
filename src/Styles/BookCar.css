@@ -7,23 +7,25 @@
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
+  color: #222;
 }
-.back-button {
+.top-left-back {
   position: absolute;
-  top: 25px;
-  left: 25px;
+  top: 18px;
+  left: 18px;
+  font-size: 18px;
+  font-weight: 800;
   background: transparent;
-  border: none;
-  font-size: 22px;
-  font-weight: 700;
+  border: 2px solid #007bff;
   color: #007bff;
-  cursor: pointer;
-  padding: 6px 14px;
+  padding: 4px 10px;
   border-radius: 8px;
+  cursor: pointer;
   transition: background-color 0.3s ease;
+  user-select: none;
 }
-.back-button:hover {
-  background-color: #dbe9ff;
+.top-left-back:hover {
+  background-color: #e9f2ff;
 }
 .car-image-container {
   width: 100%;
@@ -47,9 +49,9 @@
   text-align: center;
   margin-bottom: 50px;
   font-size: 44px;
-  color: #222;
   font-weight: 900;
   letter-spacing: 1.2px;
+  user-select: none;
 }
 .steps {
   display: flex;
@@ -58,14 +60,17 @@
   font-weight: 700;
   color: #aaa;
   font-size: 14px;
+  user-select: none;
 }
 .steps div {
   flex: 1;
   text-align: center;
   position: relative;
+  padding-bottom: 6px;
 }
 .steps div.active {
   color: #007bff;
+  font-size: 15px;
 }
 .steps div:not(:last-child)::after {
   content: "";
@@ -87,8 +92,10 @@ form input {
   font-size: 18px;
   border: 2px solid #ddd;
   border-radius: 12px;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   margin-bottom: 25px;
+  width: 100%;
+  box-sizing: border-box;
 }
 form input:focus {
   outline: none;
@@ -111,6 +118,7 @@ form input:focus {
   margin-bottom: 8px;
   color: #444;
   font-size: 14px;
+  user-select: none;
 }
 .buttons {
   display: flex;
@@ -119,27 +127,83 @@ form input:focus {
   margin-top: 25px;
 }
 .buttons button {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 16px 48px;
   border-radius: 12px;
   font-weight: 700;
   font-size: 18px;
   cursor: pointer;
   transition: background 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+  padding: 16px 48px;
 }
-.buttons button:hover {
+.next-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+}
+.next-btn:hover {
+  background: #0056b3;
+  box-shadow: 0 8px 25px rgba(0, 86, 179, 0.6);
+}
+.back-btn-bottom {
+  background: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
+  box-shadow: none;
+}
+.back-btn-bottom:hover {
+  background: #007bff;
+  color: white;
+  box-shadow: 0 8px 25px rgba(0, 86, 179, 0.6);
+}
+.confirm-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+}
+.confirm-btn:hover {
   background: #0056b3;
   box-shadow: 0 8px 25px rgba(0, 86, 179, 0.6);
 }
 .confirmation {
   text-align: center;
-  padding: 35px 25px;
+  padding: 40px 30px;
   font-size: 20px;
   color: #333;
   font-weight: 600;
+  user-select: none;
+}
+.confirmation-details {
+  text-align: left;
+  max-width: 600px;
+  margin: 20px auto 40px;
+  padding: 20px 30px;
+  border: 1.5px solid #ddd;
+  border-radius: 16px;
+  background: #fafafa;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.03);
+  font-size: 18px;
+  color: #444;
+}
+.confirmation-details p {
+  margin: 8px 0;
+  line-height: 1.4;
+}
+.done-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 48px;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5);
+  user-select: none;
+}
+.done-button:hover {
+  background: #0056b3;
+  box-shadow: 0 8px 25px rgba(0, 86, 179, 0.7);
 }
 @media (max-width: 900px) {
   .bookcar-container {
@@ -163,10 +227,15 @@ form input:focus {
     font-size: 36px;
     margin-bottom: 40px;
   }
-  .back-button {
-    top: 20px;
-    left: 20px;
-    font-size: 20px;
+  .top-left-back {
+    top: 15px;
+    left: 15px;
+    font-size: 16px;
+  }
+  .confirmation-details {
+    max-width: 100%;
+    font-size: 16px;
+    padding: 16px 20px;
   }
 }
 @media (max-width: 600px) {
