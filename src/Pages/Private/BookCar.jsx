@@ -68,9 +68,37 @@ const BookCar = () => {
     if (step > 1) setStep(step - 1);
   };
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    setStep(4);
+
+    const payload = {
+      name: data.fullName,
+      email: data.email,
+      phone: data.phone,
+      pickup_location: data.pickupLocation,
+      dropoff_location: data.dropoffLocation,
+      pickup_date: data.pickupDate,
+      return_date: data.dropoffDate,
+      car_id: parseInt(carId),
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/api/booking/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStep(4);
+      } else {
+        alert("Booking failed: " + result.error);
+      }
+    } catch (error) {
+      alert("Error: " + error.message);
+    }
   };
 
   return (
