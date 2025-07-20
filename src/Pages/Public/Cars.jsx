@@ -17,13 +17,15 @@ import chevrolet from "../../assets/images/Chevrolet.png";
 import nissan from "../../assets/images/Nissan.png";
 import volkswagon from "../../assets/images/Volkswagon.png";
 
-const Cars = ({ isLoggedIn }) => {
+const Cars = () => {
   const navigate = useNavigate();
 
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedTransmission, setSelectedTransmission] = useState("");
   const [sortOrder, setSortOrder] = useState("");
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+
+  const isLoggedIn = !!localStorage.getItem("token");
 
   const cars = [
     {
@@ -168,11 +170,6 @@ const Cars = ({ isLoggedIn }) => {
   const handleViewDetails = (id) => {
     if (isLoggedIn) navigate(`/cars/${id}`);
     else setShowLoginPopup(true);
-  };
-
-  const onLoginClick = () => {
-    setShowLoginPopup(false);
-    navigate("/login");
   };
 
   const filteredCars = cars
@@ -321,10 +318,7 @@ const Cars = ({ isLoggedIn }) => {
       </section>
 
       {showLoginPopup && (
-        <LoginPopup
-          onClose={() => setShowLoginPopup(false)}
-          onLoginClick={onLoginClick}
-        />
+        <LoginPopup onClose={() => setShowLoginPopup(false)} />
       )}
     </div>
   );

@@ -20,7 +20,6 @@ import CarDetailsPopup from "./CarDetailsPopup";
 
 const PrivCars = () => {
   const navigate = useNavigate();
-
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedTransmission, setSelectedTransmission] = useState("");
   const [sortOrder, setSortOrder] = useState("");
@@ -38,7 +37,7 @@ const PrivCars = () => {
       rating: 4.9,
       image: teslaimage,
       description:
-        "Tesla Model 3 is a fully electric sedan with long range and fast acceleration. It features Autopilot and a minimalist interior.",
+        "Tesla Model 3 is a fully electric sedan with long range and fast acceleration. It features Autopilot, minimalist interior, fast charging, and advanced safety technologies, making it ideal for modern eco-conscious drivers.",
     },
     {
       _id: "2",
@@ -51,7 +50,7 @@ const PrivCars = () => {
       rating: 4.8,
       image: bmw,
       description:
-        "BMW 5 Series offers luxury, performance, and advanced technology with a smooth ride and powerful engines.",
+        "BMW 5 Series combines elegance, performance, and innovation. It includes luxurious leather interiors, intuitive infotainment system, ambient lighting, and dynamic driving performance suitable for both city and highway trips.",
     },
     {
       _id: "3",
@@ -64,7 +63,7 @@ const PrivCars = () => {
       rating: 4.5,
       image: toyota,
       description:
-        "Toyota Corolla is a reliable compact sedan, known for fuel efficiency and low maintenance costs.",
+        "Toyota Corolla is globally renowned for reliability and efficiency. It features a comfortable ride, touchscreen infotainment, fuel-saving engine, and spacious rear seats, making it great for families and daily commutes.",
     },
     {
       _id: "4",
@@ -77,7 +76,7 @@ const PrivCars = () => {
       rating: 4.9,
       image: mercedes,
       description:
-        "Mercedes-Benz C-Class blends luxury and performance with cutting-edge tech and elegant styling.",
+        "Mercedes-Benz C-Class delivers luxury and precision engineering. Premium materials, advanced driver assistance, and a smooth ride offer a refined and safe driving experience with a strong visual presence.",
     },
     {
       _id: "5",
@@ -90,7 +89,7 @@ const PrivCars = () => {
       rating: 4.6,
       image: honda,
       description:
-        "Honda Civic is a sporty and practical compact car with great fuel economy and modern features.",
+        "Honda Civic is known for reliability and sportiness. With sharp design, user-friendly tech, great fuel economy, and smooth handling, it’s perfect for daily drivers who want efficiency and style.",
     },
     {
       _id: "6",
@@ -103,7 +102,7 @@ const PrivCars = () => {
       rating: 5.0,
       image: porche,
       description:
-        "Porsche 911 is a high-performance sports car delivering thrilling driving dynamics and iconic design.",
+        "Porsche 911 is an icon in sports car heritage. With blistering acceleration, rear-engine layout, superior balance, and luxury cabin, it’s a top choice for thrill-seekers and driving enthusiasts.",
     },
     {
       _id: "7",
@@ -116,7 +115,7 @@ const PrivCars = () => {
       rating: 4.7,
       image: audi,
       description:
-        "Audi A6 offers a refined luxury sedan experience with advanced technology and powerful engines.",
+        "Audi A6 provides a balance of luxury and performance. Its quiet cabin, virtual cockpit, adaptive cruise control, and quattro all-wheel-drive make it excellent for both comfort and capability.",
     },
     {
       _id: "8",
@@ -129,7 +128,7 @@ const PrivCars = () => {
       rating: 4.8,
       image: mustang,
       description:
-        "Ford Mustang is an American muscle car with aggressive styling and powerful V8 engine options.",
+        "Ford Mustang is a legendary American muscle car. With aggressive styling, roaring V8, rear-wheel-drive thrills, and race-ready looks, it’s built for pure performance and road presence.",
     },
     {
       _id: "9",
@@ -142,7 +141,7 @@ const PrivCars = () => {
       rating: 4.6,
       image: jeep,
       description:
-        "Jeep Wrangler is a rugged off-road SUV with iconic styling and legendary 4x4 capability.",
+        "Jeep Wrangler is built for adventure. Known for off-road strength, removable roof and doors, rugged tires, and 4x4 system, it’s ideal for wild terrains and open-air driving experiences.",
     },
     {
       _id: "10",
@@ -155,7 +154,7 @@ const PrivCars = () => {
       rating: 4.7,
       image: chevrolet,
       description:
-        "Chevrolet Camaro is a sporty coupe with bold design and performance-oriented engineering.",
+        "Chevrolet Camaro is bold and athletic. It features sporty suspension, strong engine options, modern tech, and aggressive styling suited for performance lovers and city cruisers alike.",
     },
     {
       _id: "11",
@@ -168,7 +167,7 @@ const PrivCars = () => {
       rating: 4.4,
       image: nissan,
       description:
-        "Nissan Altima is a midsize sedan with comfortable interior, good fuel economy, and safety features.",
+        "Nissan Altima offers value, comfort, and modern safety. With efficient engines, zero-gravity seats, and a spacious trunk, it's a dependable choice for long-distance comfort and convenience.",
     },
     {
       _id: "12",
@@ -181,7 +180,7 @@ const PrivCars = () => {
       rating: 4.5,
       image: volkswagon,
       description:
-        "Volkswagen Golf is a versatile hatchback combining practicality, performance, and quality build.",
+        "Volkswagen Golf is compact and premium. It offers precise handling, modern infotainment, solid build, and hatchback practicality for both solo travelers and urban families.",
     },
   ]);
 
@@ -210,11 +209,7 @@ const PrivCars = () => {
 
   return (
     <div className="cars-page">
-      <Link
-        to="/dashboard"
-        className="floating-home-btn"
-        title="Go to Dashboard"
-      >
+      <Link to="/dashboard" className="floating-home-btn">
         <FaHome size={24} />
       </Link>
 
@@ -243,7 +238,7 @@ const PrivCars = () => {
                 value={brand}
                 checked={selectedBrand === brand}
                 onChange={() => setSelectedBrand(brand)}
-              />{" "}
+              />
               {brand}
             </label>
           ))}
@@ -254,7 +249,7 @@ const PrivCars = () => {
               value=""
               checked={selectedBrand === ""}
               onChange={() => setSelectedBrand("")}
-            />{" "}
+            />
             All
           </label>
         </div>
@@ -269,7 +264,7 @@ const PrivCars = () => {
                 value={trans}
                 checked={selectedTransmission === trans}
                 onChange={() => setSelectedTransmission(trans)}
-              />{" "}
+              />
               {trans}
             </label>
           ))}
@@ -280,7 +275,7 @@ const PrivCars = () => {
               value=""
               checked={selectedTransmission === ""}
               onChange={() => setSelectedTransmission("")}
-            />{" "}
+            />
             All
           </label>
         </div>
