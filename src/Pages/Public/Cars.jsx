@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../Styles/cars.css";
-import { useNavigate, Link } from "react-router-dom";
 import { FaUserFriends, FaGasPump, FaCog, FaHome } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import LoginPopup from "./loginpopup";
 
 import teslaimage from "../../assets/images/Tesla.png";
@@ -17,9 +17,7 @@ import chevrolet from "../../assets/images/Chevrolet.png";
 import nissan from "../../assets/images/Nissan.png";
 import volkswagon from "../../assets/images/Volkswagon.png";
 
-const Cars = ({ isLoggedIn }) => {
-  const navigate = useNavigate();
-
+const Cars = () => {
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedTransmission, setSelectedTransmission] = useState("");
   const [sortOrder, setSortOrder] = useState("");
@@ -160,19 +158,17 @@ const Cars = ({ isLoggedIn }) => {
     },
   ];
 
-  const handleBook = (id) => {
-    if (isLoggedIn) navigate(`/book/${id}`);
-    else setShowLoginPopup(true);
+  const handleBook = () => {
+    setShowLoginPopup(true);
   };
 
-  const handleViewDetails = (id) => {
-    if (isLoggedIn) navigate(`/cars/${id}`);
-    else setShowLoginPopup(true);
+  const handleViewDetails = () => {
+    setShowLoginPopup(true);
   };
 
   const onLoginClick = () => {
     setShowLoginPopup(false);
-    navigate("/login");
+    // optionally navigate to login here
   };
 
   const filteredCars = cars
@@ -188,6 +184,7 @@ const Cars = ({ isLoggedIn }) => {
 
   return (
     <div className="cars-page">
+      {/* Home button like your original */}
       <Link to="/" className="floating-home-btn">
         <FaHome size={24} />
       </Link>
@@ -302,16 +299,10 @@ const Cars = ({ isLoggedIn }) => {
               </div>
               <div className="car-rating">⭐ {car.rating}</div>
               <div className="car-actions">
-                <button
-                  className="view-btn"
-                  onClick={() => handleViewDetails(car._id)}
-                >
+                <button className="view-btn" onClick={handleViewDetails}>
                   View Details
                 </button>
-                <button
-                  className="book-btn"
-                  onClick={() => handleBook(car._id)}
-                >
+                <button className="book-btn" onClick={handleBook}>
                   Book Now
                 </button>
               </div>
