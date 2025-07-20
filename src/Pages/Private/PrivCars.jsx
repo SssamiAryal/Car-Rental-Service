@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import "../../Styles/cars.css";
+import "../../Styles/PrivCars.css";
+import { useNavigate, Link } from "react-router-dom";
 import { FaUserFriends, FaGasPump, FaCog, FaHome } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import LoginPopup from "./loginpopup";
 
 import teslaimage from "../../assets/images/Tesla.png";
 import bmw from "../../assets/images/Bmw.png";
@@ -17,13 +16,16 @@ import chevrolet from "../../assets/images/Chevrolet.png";
 import nissan from "../../assets/images/Nissan.png";
 import volkswagon from "../../assets/images/Volkswagon.png";
 
-const Cars = () => {
+import CarDetailsPopup from "./CarDetailsPopup";
+
+const PrivCars = () => {
+  const navigate = useNavigate();
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedTransmission, setSelectedTransmission] = useState("");
   const [sortOrder, setSortOrder] = useState("");
-  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [popupCar, setPopupCar] = useState(null);
 
-  const cars = [
+  const [cars] = useState([
     {
       _id: "1",
       name: "Tesla Model 3",
@@ -34,6 +36,8 @@ const Cars = () => {
       transmission: "Automatic",
       rating: 4.9,
       image: teslaimage,
+      description:
+        "Tesla Model 3 is a fully electric sedan with long range and fast acceleration. It features Autopilot, minimalist interior, fast charging, and advanced safety technologies, making it ideal for modern eco-conscious drivers.",
     },
     {
       _id: "2",
@@ -45,6 +49,8 @@ const Cars = () => {
       transmission: "Automatic",
       rating: 4.8,
       image: bmw,
+      description:
+        "BMW 5 Series combines elegance, performance, and innovation. It includes luxurious leather interiors, intuitive infotainment system, ambient lighting, and dynamic driving performance suitable for both city and highway trips.",
     },
     {
       _id: "3",
@@ -56,6 +62,8 @@ const Cars = () => {
       transmission: "Manual",
       rating: 4.5,
       image: toyota,
+      description:
+        "Toyota Corolla is globally renowned for reliability and efficiency. It features a comfortable ride, touchscreen infotainment, fuel-saving engine, and spacious rear seats, making it great for families and daily commutes.",
     },
     {
       _id: "4",
@@ -67,6 +75,8 @@ const Cars = () => {
       transmission: "Automatic",
       rating: 4.9,
       image: mercedes,
+      description:
+        "Mercedes-Benz C-Class delivers luxury and precision engineering. Premium materials, advanced driver assistance, and a smooth ride offer a refined and safe driving experience with a strong visual presence.",
     },
     {
       _id: "5",
@@ -78,6 +88,8 @@ const Cars = () => {
       transmission: "Manual",
       rating: 4.6,
       image: honda,
+      description:
+        "Honda Civic is known for reliability and sportiness. With sharp design, user-friendly tech, great fuel economy, and smooth handling, it’s perfect for daily drivers who want efficiency and style.",
     },
     {
       _id: "6",
@@ -89,6 +101,8 @@ const Cars = () => {
       transmission: "Automatic",
       rating: 5.0,
       image: porche,
+      description:
+        "Porsche 911 is an icon in sports car heritage. With blistering acceleration, rear-engine layout, superior balance, and luxury cabin, it’s a top choice for thrill-seekers and driving enthusiasts.",
     },
     {
       _id: "7",
@@ -100,6 +114,8 @@ const Cars = () => {
       transmission: "Automatic",
       rating: 4.7,
       image: audi,
+      description:
+        "Audi A6 provides a balance of luxury and performance. Its quiet cabin, virtual cockpit, adaptive cruise control, and quattro all-wheel-drive make it excellent for both comfort and capability.",
     },
     {
       _id: "8",
@@ -111,6 +127,8 @@ const Cars = () => {
       transmission: "Manual",
       rating: 4.8,
       image: mustang,
+      description:
+        "Ford Mustang is a legendary American muscle car. With aggressive styling, roaring V8, rear-wheel-drive thrills, and race-ready looks, it’s built for pure performance and road presence.",
     },
     {
       _id: "9",
@@ -122,6 +140,8 @@ const Cars = () => {
       transmission: "Manual",
       rating: 4.6,
       image: jeep,
+      description:
+        "Jeep Wrangler is built for adventure. Known for off-road strength, removable roof and doors, rugged tires, and 4x4 system, it’s ideal for wild terrains and open-air driving experiences.",
     },
     {
       _id: "10",
@@ -133,6 +153,8 @@ const Cars = () => {
       transmission: "Automatic",
       rating: 4.7,
       image: chevrolet,
+      description:
+        "Chevrolet Camaro is bold and athletic. It features sporty suspension, strong engine options, modern tech, and aggressive styling suited for performance lovers and city cruisers alike.",
     },
     {
       _id: "11",
@@ -144,6 +166,8 @@ const Cars = () => {
       transmission: "Automatic",
       rating: 4.4,
       image: nissan,
+      description:
+        "Nissan Altima offers value, comfort, and modern safety. With efficient engines, zero-gravity seats, and a spacious trunk, it's a dependable choice for long-distance comfort and convenience.",
     },
     {
       _id: "12",
@@ -155,20 +179,21 @@ const Cars = () => {
       transmission: "Manual",
       rating: 4.5,
       image: volkswagon,
+      description:
+        "Volkswagen Golf is compact and premium. It offers precise handling, modern infotainment, solid build, and hatchback practicality for both solo travelers and urban families.",
     },
-  ];
+  ]);
 
-  const handleBook = () => {
-    setShowLoginPopup(true);
+  const handleBook = (id) => {
+    navigate(`/book/${id}`);
   };
 
-  const handleViewDetails = () => {
-    setShowLoginPopup(true);
+  const handleViewDetails = (car) => {
+    setPopupCar(car);
   };
 
-  const onLoginClick = () => {
-    setShowLoginPopup(false);
-    // optionally navigate to login here
+  const closePopup = () => {
+    setPopupCar(null);
   };
 
   const filteredCars = cars
@@ -184,8 +209,7 @@ const Cars = () => {
 
   return (
     <div className="cars-page">
-      {/* Home button like your original */}
-      <Link to="/" className="floating-home-btn">
+      <Link to="/dashboard" className="floating-home-btn">
         <FaHome size={24} />
       </Link>
 
@@ -214,7 +238,7 @@ const Cars = () => {
                 value={brand}
                 checked={selectedBrand === brand}
                 onChange={() => setSelectedBrand(brand)}
-              />{" "}
+              />
               {brand}
             </label>
           ))}
@@ -225,7 +249,7 @@ const Cars = () => {
               value=""
               checked={selectedBrand === ""}
               onChange={() => setSelectedBrand("")}
-            />{" "}
+            />
             All
           </label>
         </div>
@@ -240,7 +264,7 @@ const Cars = () => {
                 value={trans}
                 checked={selectedTransmission === trans}
                 onChange={() => setSelectedTransmission(trans)}
-              />{" "}
+              />
               {trans}
             </label>
           ))}
@@ -251,7 +275,7 @@ const Cars = () => {
               value=""
               checked={selectedTransmission === ""}
               onChange={() => setSelectedTransmission("")}
-            />{" "}
+            />
             All
           </label>
         </div>
@@ -299,10 +323,16 @@ const Cars = () => {
               </div>
               <div className="car-rating">⭐ {car.rating}</div>
               <div className="car-actions">
-                <button className="view-btn" onClick={handleViewDetails}>
+                <button
+                  className="view-btn"
+                  onClick={() => handleViewDetails(car)}
+                >
                   View Details
                 </button>
-                <button className="book-btn" onClick={handleBook}>
+                <button
+                  className="book-btn"
+                  onClick={() => handleBook(car._id)}
+                >
                   Book Now
                 </button>
               </div>
@@ -311,14 +341,9 @@ const Cars = () => {
         </div>
       </section>
 
-      {showLoginPopup && (
-        <LoginPopup
-          onClose={() => setShowLoginPopup(false)}
-          onLoginClick={onLoginClick}
-        />
-      )}
+      {popupCar && <CarDetailsPopup car={popupCar} onClose={closePopup} />}
     </div>
   );
 };
 
-export default Cars;
+export default PrivCars;
