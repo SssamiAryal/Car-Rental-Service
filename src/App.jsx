@@ -18,6 +18,7 @@ import PrivCars from "./Pages/Private/PrivCars";
 import PrivAbout from "./Pages/Private/PrivAbout";
 import PrivContact from "./Pages/Private/PrivContact";
 import BookCar from "./Pages/Private/BookCar";
+import AdminLogin from "./Pages/admin/Adminlogin";
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -68,6 +69,8 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
 
+      <Route path="/adminlogin" element={<AdminLogin />} />
+
       <Route
         path="/dashboard"
         element={
@@ -100,7 +103,6 @@ function App() {
           </PrivateRoute>
         }
       />
-
       <Route
         path="/book/:carId"
         element={
