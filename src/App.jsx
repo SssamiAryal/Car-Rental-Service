@@ -21,6 +21,7 @@ import BookCar from "./Pages/Private/BookCar";
 import AdminLogin from "./Pages/admin/Adminlogin";
 import AdminDashboard from "./Pages/admin/Admindashboard";
 import VehicleManagement from "./Pages/admin/Vehiclemanagement";
+import BookingManagement from "./Pages/admin/Bookingmanagement";
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -73,6 +74,7 @@ function App() {
       <Route path="/adminlogin" element={<AdminLogin />} />
       <Route path="/admindashboard" element={<AdminDashboard />} />
       <Route path="/admin/vehiclemanagement" element={<VehicleManagement />} />
+      <Route path="/admin/bookings" element={<BookingManagement />} />
 
       <Route
         path="/dashboard"
