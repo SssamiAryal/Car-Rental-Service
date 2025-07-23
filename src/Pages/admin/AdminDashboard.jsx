@@ -20,11 +20,13 @@ function AdminDashboard() {
       <aside className="sidebar">
         <h2>GadiSawari</h2>
         <ul>
-          <li className="active">Dashboard</li>
-          <li>Vehicles</li>
-          <li>Bookings</li>
-          <li>Customers</li>
-          <li>Maintenance</li>
+          <li className="active" onClick={() => navigate("/admindashboard")}>
+            Dashboard
+          </li>
+          <li onClick={() => navigate("/admin/vehiclemanagement")}>Vehicles</li>
+          <li onClick={() => navigate("/admin/bookings")}>Bookings</li>
+          <li onClick={() => navigate("/admin/customers")}>Customers</li>
+          <li onClick={() => navigate("/admin/maintenance")}>Maintenance</li>
           <li onClick={handleLogout} className="logout">
             Logout
           </li>
