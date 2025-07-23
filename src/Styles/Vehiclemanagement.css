@@ -4,6 +4,20 @@
   background-color: #f7f9fc;
 }
 
+.back-button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
 .vehicle-header {
   display: flex;
   justify-content: space-between;

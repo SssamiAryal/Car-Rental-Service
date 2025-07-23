@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { FaPlus, FaEdit, FaTrash, FaEye } from "react-icons/fa";
+import { FaPlus, FaEdit, FaTrash, FaEye, FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import "../../Styles/VehicleManagement.css";
 
 function VehicleManagement() {
+  const navigate = useNavigate();
+
   const [vehicles, setVehicles] = useState([
     {
       id: 1,
@@ -51,6 +54,12 @@ function VehicleManagement() {
 
   return (
     <div className="vehicle-wrapper">
+      <button
+        className="back-button"
+        onClick={() => navigate("/admindashboard")}
+      >
+        <FaArrowLeft /> Back to Dashboard
+      </button>
       <div className="vehicle-header">
         <h2>Vehicle Fleet Management</h2>
         <button className="add-button">
