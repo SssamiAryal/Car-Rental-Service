@@ -6,6 +6,7 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
+
 import Landingpage from "./Pages/Public/Landingpage";
 import Loginpage from "./Pages/Public/Loginpage";
 import Registerpage from "./Pages/Public/Registerpage";
@@ -13,11 +14,18 @@ import Forgetpassword from "./Pages/Public/Forgetpassword";
 import Cars from "./Pages/Public/Cars";
 import About from "./Pages/Public/About";
 import Contact from "./Pages/Public/Contact";
+
 import Dashboard from "./Pages/Private/Dashboard";
 import PrivCars from "./Pages/Private/PrivCars";
 import PrivAbout from "./Pages/Private/PrivAbout";
 import PrivContact from "./Pages/Private/PrivContact";
 import BookCar from "./Pages/Private/BookCar";
+
+import AdminLogin from "./Pages/admin/Adminlogin";
+import AdminDashboard from "./Pages/admin/Admindashboard";
+import VehicleManagement from "./Pages/admin/Vehiclemanagement";
+import BookingManagement from "./Pages/admin/Bookingmanagement";
+import Customermanagement from "./Pages/admin/Customermanagement";
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -36,27 +44,24 @@ function App() {
     setIsLoggedIn(!!token);
   }, []);
 
-  const LoginWrapper = () => {
-    return (
-      <Loginpage
-        onLogin={() => {
-          setIsLoggedIn(true);
-          navigate("/dashboard");
-        }}
-        onBack={() => navigate("/")}
-        onRegisterClick={() => navigate("/register")}
-        onForgetClick={() => navigate("/forgetpassword")}
-      />
-    );
-  };
+  const LoginWrapper = () => (
+    <Loginpage
+      onLogin={() => {
+        setIsLoggedIn(true);
+        navigate("/dashboard");
+      }}
+      onBack={() => navigate("/")}
+      onRegisterClick={() => navigate("/register")}
+      onForgetClick={() => navigate("/forgetpassword")}
+    />
+  );
 
-  const RegisterWrapper = () => {
-    return <Registerpage onBack={() => navigate("/login")} />;
-  };
-
-  const ForgetWrapper = () => {
-    return <Forgetpassword onBack={() => navigate("/login")} />;
-  };
+  const RegisterWrapper = () => (
+    <Registerpage onBack={() => navigate("/login")} />
+  );
+  const ForgetWrapper = () => (
+    <Forgetpassword onBack={() => navigate("/login")} />
+  );
 
   return (
     <Routes>
@@ -68,6 +73,14 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
 
+      {/* Admin Routes */}
+      <Route path="/adminlogin" element={<AdminLogin />} />
+      <Route path="/admindashboard" element={<AdminDashboard />} />
+      <Route path="/admin/vehiclemanagement" element={<VehicleManagement />} />
+      <Route path="/admin/bookings" element={<BookingManagement />} />
+      <Route path="/admin/customers" element={<Customermanagement />} />
+
+      {/* Private Routes */}
       <Route
         path="/dashboard"
         element={
@@ -100,7 +113,6 @@ function App() {
           </PrivateRoute>
         }
       />
-
       <Route
         path="/book/:carId"
         element={

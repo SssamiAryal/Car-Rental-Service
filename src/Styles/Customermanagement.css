@@ -1,0 +1,58 @@
+.customer-management {
+  padding: 20px;
+  font-family: sans-serif;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+}
+
+.customer-management h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.customer-management table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.customer-management th,
+.customer-management td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.customer-management th {
+  background-color: #f0f0f0;
+  font-weight: 600;
+  color: #333;
+}
+
+.customer-management td {
+  color: #555;
+}
+
+.customer-management .edit-btn,
+.customer-management .delete-btn {
+  padding: 8px 12px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.customer-management .edit-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.customer-management .delete-btn {
+  background-color: #f44336;
+  color: white;
+}
