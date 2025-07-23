@@ -18,17 +18,19 @@ function AdminDashboard() {
   return (
     <div className="admin-container">
       <aside className="sidebar">
-        <h2>GadiSawari</h2>
-        <ul>
-          <li className="active">Dashboard</li>
-          <li>Vehicles</li>
-          <li>Bookings</li>
-          <li>Customers</li>
-          <li>Maintenance</li>
-          <li onClick={handleLogout} className="logout">
-            Logout
-          </li>
-        </ul>
+        <div className="sidebar-top">
+          <h2>GadiSawari</h2>
+          <ul>
+            <li className="active">Dashboard</li>
+            <li>Vehicles</li>
+            <li>Bookings</li>
+            <li>Customers</li>
+            <li>Maintenance</li>
+          </ul>
+        </div>
+        <div className="logout-button" onClick={handleLogout}>
+          Logout
+        </div>
       </aside>
 
       <main className="dashboard">
