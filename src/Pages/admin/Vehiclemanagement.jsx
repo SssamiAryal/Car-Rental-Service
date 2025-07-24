@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaPlus, FaEdit, FaTrash, FaEye, FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "../../Styles/VehicleManagement.css";
+import AddVehicle from "./AddVehicle";
 
 function VehicleManagement() {
   const navigate = useNavigate();
@@ -45,6 +46,8 @@ function VehicleManagement() {
     },
   ]);
 
+  const [isAddVehicleOpen, setIsAddVehicleOpen] = useState(false);
+
   const getStatusClass = (status) => {
     if (status === "available") return "status available";
     if (status === "rented") return "status rented";
@@ -62,7 +65,10 @@ function VehicleManagement() {
       </button>
       <div className="vehicle-header">
         <h2>Vehicle Fleet Management</h2>
-        <button className="add-button">
+        <button
+          className="add-button"
+          onClick={() => setIsAddVehicleOpen(true)}
+        >
           <FaPlus /> Add Vehicle
         </button>
       </div>
@@ -109,6 +115,11 @@ function VehicleManagement() {
           ))}
         </tbody>
       </table>
+
+      <AddVehicle
+        isOpen={isAddVehicleOpen}
+        onClose={() => setIsAddVehicleOpen(false)}
+      />
     </div>
   );
 }

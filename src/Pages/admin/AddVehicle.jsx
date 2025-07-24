@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./AddCar.css";
+import "../../Styles/AddVehicle.css";
 
-const AddCar = ({ isOpen, onClose }) => {
-  const [carData, setCarData] = useState({
+const AddVehicle = ({ isOpen, onClose }) => {
+  const [vehicleData, setVehicleData] = useState({
     name: "",
     brand: "",
     year: "",
@@ -14,14 +14,14 @@ const AddCar = ({ isOpen, onClose }) => {
   });
 
   const handleChange = (e) => {
-    setCarData({ ...carData, [e.target.name]: e.target.value });
+    setVehicleData({ ...vehicleData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would call your backend API with carData
-    alert("Car added successfully");
-    setCarData({
+    // TODO: connect your backend API here to add the vehicle
+    alert("Vehicle added successfully");
+    setVehicleData({
       name: "",
       brand: "",
       year: "",
@@ -42,18 +42,18 @@ const AddCar = ({ isOpen, onClose }) => {
         <button className="modal-close" onClick={onClose}>
           &times;
         </button>
-        <h2>Add New Car</h2>
+        <h2>Add New Vehicle</h2>
         <form onSubmit={handleSubmit}>
           <input
             name="name"
-            value={carData.name}
+            value={vehicleData.name}
             onChange={handleChange}
             placeholder="Name"
             required
           />
           <input
             name="brand"
-            value={carData.brand}
+            value={vehicleData.brand}
             onChange={handleChange}
             placeholder="Brand"
             required
@@ -61,44 +61,44 @@ const AddCar = ({ isOpen, onClose }) => {
           <input
             name="year"
             type="number"
-            value={carData.year}
+            value={vehicleData.year}
             onChange={handleChange}
             placeholder="Year"
           />
           <input
             name="fuel_type"
-            value={carData.fuel_type}
+            value={vehicleData.fuel_type}
             onChange={handleChange}
             placeholder="Fuel Type"
           />
           <input
             name="transmission"
-            value={carData.transmission}
+            value={vehicleData.transmission}
             onChange={handleChange}
             placeholder="Transmission"
           />
           <input
             name="price_per_day"
             type="number"
-            value={carData.price_per_day}
+            value={vehicleData.price_per_day}
             onChange={handleChange}
             placeholder="Price per Day"
             required
           />
           <input
             name="image_url"
-            value={carData.image_url}
+            value={vehicleData.image_url}
             onChange={handleChange}
             placeholder="Image URL"
           />
           <textarea
             name="description"
-            value={carData.description}
+            value={vehicleData.description}
             onChange={handleChange}
             placeholder="Description"
           />
           <button type="submit" className="submit-btn">
-            Add Car
+            Add Vehicle
           </button>
         </form>
       </div>
@@ -106,4 +106,4 @@ const AddCar = ({ isOpen, onClose }) => {
   );
 };
 
-export default AddCar;
+export default AddVehicle;
