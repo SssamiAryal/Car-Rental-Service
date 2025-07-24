@@ -5,10 +5,11 @@ const AddVehicle = ({ isOpen, onClose }) => {
   const [vehicleData, setVehicleData] = useState({
     name: "",
     brand: "",
-    year: "",
-    fuel_type: "",
+    price: "",
+    seats: "",
+    fuel: "",
     transmission: "",
-    price_per_day: "",
+    rating: "",
     image_url: "",
     description: "",
   });
@@ -17,21 +18,40 @@ const AddVehicle = ({ isOpen, onClose }) => {
     setVehicleData({ ...vehicleData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setVehicleData({ ...vehicleData, image_url: imageUrl });
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: connect your backend API here to add the vehicle
-    alert("Vehicle added successfully");
-    setVehicleData({
-      name: "",
-      brand: "",
-      year: "",
-      fuel_type: "",
-      transmission: "",
-      price_per_day: "",
-      image_url: "",
-      description: "",
-    });
-    onClose();
+    try {
+      const res = await fetch("http://localhost:5000/api/vehicle", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(vehicleData),
+      });
+      if (res.ok) {
+        alert("Vehicle added successfully");
+        setVehicleData({
+          name: "",
+          brand: "",
+          price: "",
+          seats: "",
+          fuel: "",
+          transmission: "",
+          rating: "",
+          image_url: "",
+          description: "",
+        });
+        onClose();
+      }
+    } catch (err) {
+      alert("Failed to add vehicle");
+    }
   };
 
   if (!isOpen) return null;
@@ -59,15 +79,23 @@ const AddVehicle = ({ isOpen, onClose }) => {
             required
           />
           <input
-            name="year"
+            name="price"
             type="number"
-            value={vehicleData.year}
+            value={vehicleData.price}
             onChange={handleChange}
-            placeholder="Year"
+            placeholder="Price"
+            required
           />
           <input
-            name="fuel_type"
-            value={vehicleData.fuel_type}
+            name="seats"
+            type="number"
+            value={vehicleData.seats}
+            onChange={handleChange}
+            placeholder="Seats"
+          />
+          <input
+            name="fuel"
+            value={vehicleData.fuel}
             onChange={handleChange}
             placeholder="Fuel Type"
           />
@@ -78,19 +106,14 @@ const AddVehicle = ({ isOpen, onClose }) => {
             placeholder="Transmission"
           />
           <input
-            name="price_per_day"
+            name="rating"
             type="number"
-            value={vehicleData.price_per_day}
+            step="0.1"
+            value={vehicleData.rating}
             onChange={handleChange}
-            placeholder="Price per Day"
-            required
+            placeholder="Rating"
           />
-          <input
-            name="image_url"
-            value={vehicleData.image_url}
-            onChange={handleChange}
-            placeholder="Image URL"
-          />
+          <input type="file" accept="image/*" onChange={handleImageUpload} />
           <textarea
             name="description"
             value={vehicleData.description}
