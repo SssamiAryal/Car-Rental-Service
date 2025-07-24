@@ -1,10 +1,11 @@
+// app.js or server.js
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const sequelize = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const bookingRoutes = require("./routes/Booking");
-const vehicleRoutes = require("./routes/Vehicle");
+const vehicleRoutes = require("./routes/vehicleRoutes");
 
 const app = express();
 
@@ -22,9 +23,6 @@ app.get("/", (req, res) => {
 sequelize
   .sync({ alter: true })
   .then(() => {
-    console.log("Database synced");
-    app.listen(process.env.PORT || 5000, () => {
-      console.log(`Server running on port ${process.env.PORT || 5000}`);
-    });
+    app.listen(process.env.PORT || 5000);
   })
-  .catch((err) => console.log("DB connection error:", err));
+  .catch(() => {});
