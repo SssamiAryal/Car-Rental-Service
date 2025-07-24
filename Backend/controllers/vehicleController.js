@@ -1,17 +1,9 @@
 const Vehicle = require("../models/vehicleModel");
 
 const addVehicle = async (req, res) => {
-  const {
-    name,
-    brand,
-    price,
-    seats,
-    fuel,
-    transmission,
-    rating,
-    image_url,
-    description,
-  } = req.body;
+  const { name, brand, price, seats, fuel, transmission, rating, description } =
+    req.body;
+  const image_url = req.file ? req.file.filename : null;
   const vehicle = await Vehicle.create({
     name,
     brand,
