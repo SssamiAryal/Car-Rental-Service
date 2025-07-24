@@ -10,9 +10,9 @@ const AddVehicle = ({ isOpen, onClose }) => {
     fuel: "",
     transmission: "",
     rating: "",
-    image_url: "",
     description: "",
   });
+  const [imageFile, setImageFile] = useState(null);
 
   const handleChange = (e) => {
     setVehicleData({ ...vehicleData, [e.target.name]: e.target.value });
@@ -21,19 +21,27 @@ const AddVehicle = ({ isOpen, onClose }) => {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setVehicleData({ ...vehicleData, image_url: imageUrl });
+      setImageFile(file);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    Object.entries(vehicleData).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    if (imageFile) {
+      formData.append("image", imageFile); // backend should accept 'image'
+    }
+
     try {
       const res = await fetch("http://localhost:5000/api/vehicle", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(vehicleData),
+        body: formData,
       });
+
       if (res.ok) {
         alert("Vehicle added successfully");
         setVehicleData({
@@ -44,10 +52,12 @@ const AddVehicle = ({ isOpen, onClose }) => {
           fuel: "",
           transmission: "",
           rating: "",
-          image_url: "",
           description: "",
         });
+        setImageFile(null);
         onClose();
+      } else {
+        alert("Failed to add vehicle");
       }
     } catch (err) {
       alert("Failed to add vehicle");
@@ -63,7 +73,7 @@ const AddVehicle = ({ isOpen, onClose }) => {
           &times;
         </button>
         <h2>Add New Vehicle</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
           <input
             name="name"
             value={vehicleData.name}
@@ -113,7 +123,12 @@ const AddVehicle = ({ isOpen, onClose }) => {
             onChange={handleChange}
             placeholder="Rating"
           />
-          <input type="file" accept="image/*" onChange={handleImageUpload} />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            required
+          />
           <textarea
             name="description"
             value={vehicleData.description}

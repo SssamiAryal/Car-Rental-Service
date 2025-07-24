@@ -135,8 +135,11 @@ const PrivCars = () => {
 
         <div className="priv-car-cards">
           {filteredCars.map((car) => (
-            <div className="priv-car-card" key={car._id}>
-              <img src={car.image} alt={car.name} />
+            <div className="priv-car-card" key={car.id || car._id}>
+              <img
+                src={`http://localhost:5000/uploads/${car.image_url}`}
+                alt={car.name}
+              />
               <div className="priv-car-price">${car.price}/day</div>
               <h3 className="priv-car-name">{car.name}</h3>
               <p className="priv-car-brand">{car.brand}</p>
@@ -161,7 +164,7 @@ const PrivCars = () => {
                 </button>
                 <button
                   className="priv-book-btn"
-                  onClick={() => handleBook(car._id)}
+                  onClick={() => handleBook(car.id || car._id)}
                 >
                   Book Now
                 </button>
