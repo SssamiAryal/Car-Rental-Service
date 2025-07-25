@@ -1,3 +1,4 @@
+// frontend/src/App.jsx
 import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -59,6 +60,7 @@ function App() {
   const RegisterWrapper = () => (
     <Registerpage onBack={() => navigate("/login")} />
   );
+
   const ForgetWrapper = () => (
     <Forgetpassword onBack={() => navigate("/login")} />
   );
@@ -73,14 +75,12 @@ function App() {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
 
-      {/* Admin Routes */}
       <Route path="/adminlogin" element={<AdminLogin />} />
       <Route path="/admindashboard" element={<AdminDashboard />} />
       <Route path="/admin/vehiclemanagement" element={<VehicleManagement />} />
       <Route path="/admin/bookings" element={<BookingManagement />} />
       <Route path="/admin/customers" element={<Customermanagement />} />
 
-      {/* Private Routes */}
       <Route
         path="/dashboard"
         element={

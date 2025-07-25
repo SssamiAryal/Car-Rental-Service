@@ -1,3 +1,4 @@
+/* frontend/src/Styles/BookingManagement.css */
 .booking-wrapper {
   padding: 30px;
   font-family: "Inter", sans-serif;
@@ -30,41 +31,6 @@
   font-weight: 600;
 }
 
-.add-button {
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  font-size: 14px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
-
-.booking-controls {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.booking-controls input {
-  flex: 1;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-.booking-controls select {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
 .booking-table {
   width: 100%;
   border-collapse: collapse;
@@ -86,31 +52,7 @@
   font-weight: 500;
 }
 
-.status {
-  padding: 6px 12px;
-  font-size: 12px;
-  border-radius: 999px;
-  text-transform: capitalize;
-  font-weight: 500;
-}
-
-.status.active {
-  background-color: #e6f4ea;
-  color: #2e7d32;
-}
-
-.status.completed {
-  background-color: #e3f2fd;
-  color: #1565c0;
-}
-
-.status.pending {
-  background-color: #fff3e0;
-  color: #ef6c00;
-}
-
 .actions svg {
-  margin-right: 10px;
   cursor: pointer;
   color: #444;
 }
