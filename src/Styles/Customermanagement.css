@@ -1,8 +1,22 @@
 .customer-management {
-  padding: 20px;
-  font-family: sans-serif;
-  background-color: #f8f8f8;
+  padding: 30px;
+  font-family: "Inter", sans-serif;
+  background-color: #f7f9fc;
   min-height: 100vh;
+}
+
+.back-button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .customer-management h2 {
@@ -15,44 +29,31 @@
   width: 100%;
   border-collapse: collapse;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .customer-management th,
 .customer-management td {
   padding: 14px 16px;
   text-align: left;
+  font-size: 14px;
   border-bottom: 1px solid #e0e0e0;
+  color: #555;
 }
 
-.customer-management th {
-  background-color: #f0f0f0;
+.customer-management thead {
+  background-color: #f0f2f5;
   font-weight: 600;
   color: #333;
 }
 
-.customer-management td {
-  color: #555;
-}
-
-.customer-management .edit-btn,
-.customer-management .delete-btn {
-  padding: 8px 12px;
-  margin-right: 8px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
+.actions svg {
   cursor: pointer;
+  color: #444;
 }
 
-.customer-management .edit-btn {
-  background-color: #4caf50;
-  color: white;
-}
-
-.customer-management .delete-btn {
-  background-color: #f44336;
-  color: white;
+.actions svg:hover {
+  color: #000;
 }

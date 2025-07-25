@@ -1,4 +1,3 @@
-// frontend/src/Pages/admin/Bookingmanagement.jsx
 import React, { useState, useEffect } from "react";
 import { FaTrash, FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";

@@ -1,4 +1,3 @@
-// backend/controllers/adminBookingManagementController.js
 const Booking = require("../models/bookingModel");
 
 exports.getAllBookings = async (req, res) => {
