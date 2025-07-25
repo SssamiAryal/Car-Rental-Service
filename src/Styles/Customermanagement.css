@@ -51,9 +51,9 @@
 
 .actions svg {
   cursor: pointer;
-  color: #444;
+  color: red;
 }
 
 .actions svg:hover {
-  color: #000;
+  color: darkred;
 }
