@@ -1,26 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { FaTrash, FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import "../../Styles/CustomerManagement.css";
 
-const CustomerManagement = () => {
-  const customers = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      phone: "+977-9876543210",
-      address: "Kathmandu, Nepal",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane@example.com",
-      phone: "+977-9841234567",
-      address: "Pokhara, Nepal",
-    },
-  ];
+function CustomerManagement() {
+  const navigate = useNavigate();
+  const [customers, setCustomers] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/admin/customers")
+      .then((res) => res.json())
+      .then((data) => setCustomers(data))
+      .catch(() => setCustomers([]));
+  }, []);
+
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5000/api/admin/customers/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then(() => setCustomers(customers.filter((c) => c.id !== id)));
+  };
 
   return (
     <div className="customer-management">
+      <button
+        className="back-button"
+        onClick={() => navigate("/admindashboard")}
+      >
+        <FaArrowLeft /> Back to Dashboard
+      </button>
       <h2>Customer Management</h2>
       <table>
         <thead>
@@ -28,29 +37,35 @@ const CustomerManagement = () => {
             <th>SN</th>
             <th>Customer Name</th>
             <th>Email</th>
-            <th>Phone No.</th>
-            <th>Address</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {customers.map((cust, index) => (
-            <tr key={cust.id}>
-              <td>{index + 1}</td>
-              <td>{cust.name}</td>
-              <td>{cust.email}</td>
-              <td>{cust.phone}</td>
-              <td>{cust.address}</td>
-              <td>
-                <button className="edit-btn">Edit</button>
-                <button className="delete-btn">Delete</button>
+          {customers.length === 0 ? (
+            <tr>
+              <td colSpan="4" style={{ textAlign: "center" }}>
+                No customers available
               </td>
             </tr>
-          ))}
+          ) : (
+            customers.map((cust, index) => (
+              <tr key={cust.id}>
+                <td>{index + 1}</td>
+                <td>{cust.name}</td>
+                <td>{cust.email}</td>
+                <td className="actions">
+                  <FaTrash
+                    style={{ cursor: "pointer", color: "red" }}
+                    onClick={() => handleDelete(cust.id)}
+                  />
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
   );
-};
+}
 
 export default CustomerManagement;
