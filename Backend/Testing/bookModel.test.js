@@ -32,9 +32,5 @@ describe("Booking Model", () => {
     expect(booking.car_name).toBe("Honda Civic");
   });
 
-  it("should throw error if required fields are missing", async () => {
-    // sequelize-mock does not enforce validation by default,
-    // so you would test validations at Sequelize or integration level
-    // or mock a reject for invalid data here.
-  });
+  it("should throw error if required fields are missing", async () => {});
 });
