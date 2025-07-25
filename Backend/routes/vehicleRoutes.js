@@ -1,10 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const vehicleController = require("../controllers/vehicleController");
+const {
+  addVehicle,
+  getAllVehicles,
+  updateVehicle,
+  deleteVehicle,
+} = require("../controllers/vehicleController");
+const upload = require("../middleware/upload");
 
-router.get("/", vehicleController.getVehicles);
-router.post("/", vehicleController.createVehicle);
-router.put("/:id", vehicleController.updateVehicle);
-router.delete("/:id", vehicleController.deleteVehicle);
+router.post("/", upload.single("image"), addVehicle);
+router.get("/", getAllVehicles);
+router.put("/:id", upload.single("image"), updateVehicle);
+router.delete("/:id", deleteVehicle);
 
 module.exports = router;
