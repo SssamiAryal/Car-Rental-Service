@@ -1,34 +1,7 @@
+// BookCar.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../../Styles/BookCar.css";
-
-import teslaimage from "../../assets/images/Tesla.png";
-import bmw from "../../assets/images/Bmw.png";
-import toyota from "../../assets/images/Toyota.png";
-import mercedes from "../../assets/images/Mercedes.png";
-import honda from "../../assets/images/Honda.png";
-import porche from "../../assets/images/Porche.png";
-import audi from "../../assets/images/Audi.png";
-import mustang from "../../assets/images/mustang.png";
-import jeep from "../../assets/images/Jeep.png";
-import chevrolet from "../../assets/images/Chevrolet.png";
-import nissan from "../../assets/images/Nissan.png";
-import volkswagon from "../../assets/images/Volkswagon.png";
-
-const carImages = {
-  1: teslaimage,
-  2: bmw,
-  3: toyota,
-  4: mercedes,
-  5: honda,
-  6: porche,
-  7: audi,
-  8: mustang,
-  9: jeep,
-  10: chevrolet,
-  11: nissan,
-  12: volkswagon,
-};
 
 const BookCar = () => {
   const navigate = useNavigate();
@@ -51,8 +24,17 @@ const BookCar = () => {
   const [carImage, setCarImage] = useState(null);
 
   useEffect(() => {
-    if (carId && carImages[carId]) {
-      setCarImage(carImages[carId]);
+    if (carId) {
+      fetch(`http://localhost:5000/api/vehicle/${carId}`)
+        .then((res) => res.json())
+        .then((car) => {
+          if (car && car.image_url) {
+            setCarImage(`http://localhost:5000/uploads/${car.image_url}`);
+          } else {
+            setCarImage(null);
+          }
+        })
+        .catch(() => setCarImage(null));
     }
   }, [carId]);
 

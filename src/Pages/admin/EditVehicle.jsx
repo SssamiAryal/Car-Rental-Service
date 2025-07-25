@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+// EditVehicle.jsx
+import React, { useState, useEffect } from "react";
 import "../../Styles/EditVehicle.css";
 
 const EditVehicle = ({ isOpen, onClose, vehicle, onUpdate }) => {
   const [vehicleData, setVehicleData] = useState({ ...vehicle });
+
+  useEffect(() => {
+    setVehicleData({ ...vehicle });
+  }, [vehicle]);
 
   const handleChange = (e) => {
     setVehicleData({ ...vehicleData, [e.target.name]: e.target.value });
@@ -24,9 +29,10 @@ const EditVehicle = ({ isOpen, onClose, vehicle, onUpdate }) => {
       );
 
       if (res.ok) {
+        const updatedVehicle = await res.json();
         alert("Vehicle updated successfully");
-        onUpdate(); // Refresh table
-        onClose(); // Close modal
+        onUpdate(updatedVehicle);
+        onClose();
       } else {
         alert("Failed to update vehicle");
       }
@@ -47,14 +53,14 @@ const EditVehicle = ({ isOpen, onClose, vehicle, onUpdate }) => {
         <form onSubmit={handleSubmit}>
           <input
             name="name"
-            value={vehicleData.name}
+            value={vehicleData.name || ""}
             onChange={handleChange}
             placeholder="Name"
             required
           />
           <input
             name="brand"
-            value={vehicleData.brand}
+            value={vehicleData.brand || ""}
             onChange={handleChange}
             placeholder="Brand"
             required
@@ -62,7 +68,7 @@ const EditVehicle = ({ isOpen, onClose, vehicle, onUpdate }) => {
           <input
             name="price"
             type="number"
-            value={vehicleData.price}
+            value={vehicleData.price || ""}
             onChange={handleChange}
             placeholder="Price"
             required
@@ -70,19 +76,19 @@ const EditVehicle = ({ isOpen, onClose, vehicle, onUpdate }) => {
           <input
             name="seats"
             type="number"
-            value={vehicleData.seats}
+            value={vehicleData.seats || ""}
             onChange={handleChange}
             placeholder="Seats"
           />
           <input
             name="fuel"
-            value={vehicleData.fuel}
+            value={vehicleData.fuel || ""}
             onChange={handleChange}
             placeholder="Fuel Type"
           />
           <input
             name="transmission"
-            value={vehicleData.transmission}
+            value={vehicleData.transmission || ""}
             onChange={handleChange}
             placeholder="Transmission"
           />
@@ -90,13 +96,13 @@ const EditVehicle = ({ isOpen, onClose, vehicle, onUpdate }) => {
             name="rating"
             type="number"
             step="0.1"
-            value={vehicleData.rating}
+            value={vehicleData.rating || ""}
             onChange={handleChange}
             placeholder="Rating"
           />
           <textarea
             name="description"
-            value={vehicleData.description}
+            value={vehicleData.description || ""}
             onChange={handleChange}
             placeholder="Description"
           />

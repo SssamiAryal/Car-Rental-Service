@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../Styles/AddVehicle.css";
 
-const AddVehicle = ({ isOpen, onClose }) => {
+const AddVehicle = ({ isOpen, onClose, onAdd }) => {
   const [vehicleData, setVehicleData] = useState({
     name: "",
     brand: "",
@@ -33,7 +33,7 @@ const AddVehicle = ({ isOpen, onClose }) => {
       formData.append(key, value);
     });
     if (imageFile) {
-      formData.append("image", imageFile); // backend should accept 'image'
+      formData.append("image", imageFile);
     }
 
     try {
@@ -43,6 +43,8 @@ const AddVehicle = ({ isOpen, onClose }) => {
       });
 
       if (res.ok) {
+        const newVehicle = await res.json();
+        onAdd(newVehicle);
         alert("Vehicle added successfully");
         setVehicleData({
           name: "",

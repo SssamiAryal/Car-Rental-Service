@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaPlus, FaEdit, FaTrash, FaEye, FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "../../Styles/VehicleManagement.css";
@@ -12,6 +12,17 @@ function VehicleManagement() {
   const [isEditVehicleOpen, setIsEditVehicleOpen] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
 
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/vehicle");
+        const data = await res.json();
+        setVehicles(data);
+      } catch (err) {}
+    };
+    fetchVehicles();
+  }, []);
+
   const handleAddVehicle = (newVehicle) => {
     setVehicles((prev) => [...prev, newVehicle]);
   };
@@ -20,6 +31,24 @@ function VehicleManagement() {
     setVehicles((prev) =>
       prev.map((v) => (v.id === updatedVehicle.id ? updatedVehicle : v))
     );
+  };
+
+  const handleDeleteVehicle = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this vehicle?"))
+      return;
+    try {
+      const res = await fetch(`http://localhost:5000/api/vehicle/${id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        setVehicles((prev) => prev.filter((v) => v.id !== id));
+        alert("Vehicle deleted successfully");
+      } else {
+        alert("Failed to delete vehicle");
+      }
+    } catch {
+      alert("Failed to delete vehicle");
+    }
   };
 
   return (
@@ -39,13 +68,6 @@ function VehicleManagement() {
         >
           <FaPlus /> Add Vehicle
         </button>
-      </div>
-
-      <div className="vehicle-controls">
-        <input type="text" placeholder="Search vehicles..." />
-        <select>
-          <option>All Brands</option>
-        </select>
       </div>
 
       <table className="vehicle-table">
@@ -83,12 +105,16 @@ function VehicleManagement() {
                 <td className="actions">
                   <FaEye />
                   <FaEdit
+                    style={{ cursor: "pointer" }}
                     onClick={() => {
                       setSelectedVehicle(v);
                       setIsEditVehicleOpen(true);
                     }}
                   />
-                  <FaTrash />
+                  <FaTrash
+                    style={{ cursor: "pointer" }}
+                    onClick={() => handleDeleteVehicle(v.id)}
+                  />
                 </td>
               </tr>
             ))
@@ -109,6 +135,7 @@ function VehicleManagement() {
 
       {isEditVehicleOpen && selectedVehicle && (
         <EditVehicle
+          isOpen={isEditVehicleOpen}
           vehicle={selectedVehicle}
           onClose={() => setIsEditVehicleOpen(false)}
           onUpdate={(updated) => {
