@@ -3,16 +3,23 @@ import { FaPlus, FaEdit, FaTrash, FaEye, FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "../../Styles/VehicleManagement.css";
 import AddVehicle from "./AddVehicle";
+import EditVehicle from "./EditVehicle";
 
 function VehicleManagement() {
   const navigate = useNavigate();
-
   const [vehicles, setVehicles] = useState([]);
-
   const [isAddVehicleOpen, setIsAddVehicleOpen] = useState(false);
+  const [isEditVehicleOpen, setIsEditVehicleOpen] = useState(false);
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
 
   const handleAddVehicle = (newVehicle) => {
     setVehicles((prev) => [...prev, newVehicle]);
+  };
+
+  const handleUpdateVehicle = (updatedVehicle) => {
+    setVehicles((prev) =>
+      prev.map((v) => (v.id === updatedVehicle.id ? updatedVehicle : v))
+    );
   };
 
   return (
@@ -38,7 +45,6 @@ function VehicleManagement() {
         <input type="text" placeholder="Search vehicles..." />
         <select>
           <option>All Brands</option>
-          {/* Add filter options if needed */}
         </select>
       </div>
 
@@ -76,7 +82,12 @@ function VehicleManagement() {
                 <td>{v.description}</td>
                 <td className="actions">
                   <FaEye />
-                  <FaEdit />
+                  <FaEdit
+                    onClick={() => {
+                      setSelectedVehicle(v);
+                      setIsEditVehicleOpen(true);
+                    }}
+                  />
                   <FaTrash />
                 </td>
               </tr>
@@ -92,6 +103,17 @@ function VehicleManagement() {
           onAdd={(vehicle) => {
             handleAddVehicle(vehicle);
             setIsAddVehicleOpen(false);
+          }}
+        />
+      )}
+
+      {isEditVehicleOpen && selectedVehicle && (
+        <EditVehicle
+          vehicle={selectedVehicle}
+          onClose={() => setIsEditVehicleOpen(false)}
+          onUpdate={(updated) => {
+            handleUpdateVehicle(updated);
+            setIsEditVehicleOpen(false);
           }}
         />
       )}
