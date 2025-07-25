@@ -34,6 +34,10 @@ const Booking = sequelize.define("Booking", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  car_name: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 module.exports = Booking;
